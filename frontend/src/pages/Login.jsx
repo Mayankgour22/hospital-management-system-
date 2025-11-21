@@ -14,17 +14,18 @@ const Login = ({ setUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/login", formData);
+      const res = await axios.post(
+        "https://hospital-management-system-5-hh17.onrender.com/api/login",
+        formData
+      );
 
       const { token, user } = res.data;
 
-     
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
       setUser(user);
 
-     
       navigate(
         user.role === "doctor" ? "/doctor-dashboard" : "/user-dashboard"
       );

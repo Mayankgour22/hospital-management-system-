@@ -5,16 +5,14 @@ const DoctorDashboard = () => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  
   const user = JSON.parse(localStorage.getItem("user"));
-  const doctorId = user?.id; 
-
+  const doctorId = user?.id;
 
   const fetchAppointments = async () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `http://localhost:5000/api/appointments/doctor/${doctorId}`
+        `https://hospital-management-system-5-hh17.onrender.com/api/appointments/doctor/${doctorId}`
       );
       setAppointments(res.data.appointments || []);
     } catch (error) {
@@ -29,12 +27,14 @@ const DoctorDashboard = () => {
     if (doctorId) fetchAppointments();
   }, [doctorId]);
 
-
   const handleStatusUpdate = async (id, status) => {
     try {
-      await axios.put(`http://localhost:5000/api/appointments/${id}`, {
-        status,
-      });
+      await axios.put(
+        `https://hospital-management-system-5-hh17.onrender.com/api/appointments/${id}`,
+        {
+          status,
+        }
+      );
       alert(`Appointment ${status.toLowerCase()} successfully!`);
       fetchAppointments();
     } catch (err) {

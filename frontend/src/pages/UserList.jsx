@@ -10,7 +10,9 @@ const UserList = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/api/users${filter ? `?role=${filter}` : ""}`
+        `https://hospital-management-system-5-hh17.onrender.com/api/users${
+          filter ? `?role=${filter}` : ""
+        }`
       );
       setUsers(response.data.data || []);
     } catch (error) {

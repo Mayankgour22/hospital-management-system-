@@ -6,23 +6,21 @@ const Signup = () => {
     name: "",
     email: "",
     password: "",
-    role: "user", 
+    role: "user",
     specialization: "",
   });
 
   const [message, setMessage] = useState("");
 
-  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/signup",
+        "https://hospital-management-system-5-hh17.onrender.com/api/signup",
         formData
       );
       setMessage(res.data.message);
@@ -98,7 +96,6 @@ const Signup = () => {
           <option value="doctor">Doctor</option>
         </select>
 
-        
         {formData.role === "doctor" && (
           <>
             <label>Specialization:</label>

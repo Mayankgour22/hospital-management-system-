@@ -12,7 +12,9 @@ const BookAppointment = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/users");
+        const res = await axios.get(
+          "https://hospital-management-system-5-hh17.onrender.com/api/users"
+        );
         const doctorList = res.data.data.filter((u) => u.role === "doctor");
         setDoctors(doctorList);
       } catch (error) {
@@ -25,13 +27,16 @@ const BookAppointment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/appointments", {
-        patientId: user.id, 
-        doctorId: selectedDoctor,
-        date,
-        time,
-        reason,
-      });
+      await axios.post(
+        "https://hospital-management-system-5-hh17.onrender.com/api/appointments",
+        {
+          patientId: user.id,
+          doctorId: selectedDoctor,
+          date,
+          time,
+          reason,
+        }
+      );
       alert("Appointment booked successfully!");
       setSelectedDoctor("");
       setDate("");

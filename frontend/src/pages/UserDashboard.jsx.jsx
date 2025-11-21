@@ -5,10 +5,8 @@ const UserDashboard = () => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
 
- 
   const user = JSON.parse(localStorage.getItem("user"));
   const patientId = user?._id || user?.id;
-
 
   const fetchAppointments = async () => {
     if (!patientId) {
@@ -19,7 +17,7 @@ const UserDashboard = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `http://localhost:5000/api/appointments/patient/${patientId}`
+        `https://hospital-management-system-5-hh17.onrender.com/api/appointments/patient/${patientId}`
       );
       setAppointments(res.data.appointments || []);
     } catch (error) {
@@ -34,12 +32,13 @@ const UserDashboard = () => {
     fetchAppointments();
   }, []);
 
- 
   const handleCancel = async (id) => {
     if (!window.confirm("Are you sure you want to cancel this appointment?"))
       return;
     try {
-      await axios.put(`http://localhost:5000/api/appointments/${id}/cancel`);
+      await axios.put(
+        `https://hospital-management-system-5-hh17.onrender.com/api/appointments/${id}/cancel`
+      );
       alert("Appointment cancelled successfully!");
       fetchAppointments();
     } catch (err) {
